@@ -1,4 +1,6 @@
 HELP.md
+ida-client-1.0.0.jar
+lib/
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
