@@ -72,7 +72,7 @@ public class IdaClientDemoApplication {
 					System.out.println("Sending auth request....");
 
 					AuthRequestDTO authRequest = new AuthRequestDTO();
-					authRequest.setId("mosip.identity.auth");
+					authRequest.setId("fayda.identity.auth");
 					authRequest.setVersion("1.0");
 					authRequest.setTransactionID("1234567890");
 					authRequest.setRequestTime(Instant.now().toString());
@@ -102,7 +102,7 @@ public class IdaClientDemoApplication {
 					System.out.println("Sending ekyc request....");
 
 					AuthRequestDTO ekycRequest = new AuthRequestDTO();
-					ekycRequest.setId("mosip.identity.auth");
+					ekycRequest.setId("fayda.identity.auth");
 					ekycRequest.setVersion("1.0");
 					ekycRequest.setTransactionID("1234567890");
 					ekycRequest.setRequestTime(Instant.now().toString());
