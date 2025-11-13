@@ -13,7 +13,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()   // Disable CSRF
+                .httpBasic().disable()  // Disable HTTP Basic Authentication
+                .formLogin().disable()  // Disable form login
                 .authorizeRequests()
-                .anyRequest().permitAll();  // Allow all requests (no authentication)
+                .antMatchers("/**").permitAll()  // Allow all requests (no authentication)
+                .anyRequest().permitAll();
     }
 }
+

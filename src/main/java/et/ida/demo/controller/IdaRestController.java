@@ -1,11 +1,9 @@
 package et.ida.demo.controller;
 
+import et.fayda.ida.client.EkycClient;
 import et.fayda.ida.dto.request.AuthRequestDTO;
 import et.fayda.ida.dto.request.AuthTypeDTO;
 import et.fayda.ida.dto.request.OtpRequestDTO;
-import et.fayda.ida.service.AuthService;
-import et.fayda.ida.service.EkycService;
-import et.fayda.ida.service.OtpService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +16,10 @@ import java.util.Map;
 @RequestMapping("")
 public class IdaRestController {
 
-    private final OtpService otpService;
-    private final AuthService authService;
-    private final EkycService ekycService;
+    private final EkycClient ekycClient;
 
-    public IdaRestController(OtpService otpService, AuthService authService, EkycService ekycService) {
-        this.otpService = otpService;
-        this.authService = authService;
-        this.ekycService = ekycService;
+    public IdaRestController(EkycClient ekycClient) {
+        this.ekycClient = ekycClient;
     }
 
     @PostMapping("/otp/{individualId}")
@@ -37,9 +31,8 @@ public class IdaRestController {
             otpRequest.setRequestTime(Instant.now().toString());
             otpRequest.setOtpChannel(List.of("EMAIL", "PHONE"));
 
-            Map<String, Object> otpResponse = otpService.requestOtp(otpRequest);
+            Map<String, Object> otpResponse = ekycClient.requestOtp(otpRequest);
             return ResponseEntity.ok(otpResponse);
-
         } catch (Exception e) {
             Map<String, Object> error = new HashMap<>();
             error.put("status", "ERROR");
@@ -52,7 +45,6 @@ public class IdaRestController {
     public ResponseEntity<Map<String, Object>> authenticate(
             @PathVariable String individualId,
             @PathVariable String otp) {
-
         try {
             AuthRequestDTO authRequest = new AuthRequestDTO();
             authRequest.setId("fayda.identity.auth");
@@ -68,9 +60,8 @@ public class IdaRestController {
             authType.setOtp(true);
             authRequest.setRequestedAuth(authType);
 
-            Map<String, Object> authResponse = authService.authenticate(authRequest);
+            Map<String, Object> authResponse = ekycClient.authenticate(authRequest);
             return ResponseEntity.ok(authResponse);
-
         } catch (Exception e) {
             Map<String, Object> error = new HashMap<>();
             error.put("status", "ERROR");
@@ -83,7 +74,6 @@ public class IdaRestController {
     public ResponseEntity<Map<String, Object>> performEkyc(
             @PathVariable String individualId,
             @PathVariable String otp) {
-
         try {
             AuthRequestDTO ekycRequest = new AuthRequestDTO();
             ekycRequest.setId("fayda.identity.auth");
@@ -100,15 +90,14 @@ public class IdaRestController {
             authType.setDemo(true);
             ekycRequest.setRequestedAuth(authType);
 
-            Map<String, Object> ekycResponse = ekycService.performEkyc(ekycRequest);
+            Map<String, Object> ekycResponse = ekycClient.performEkyc(ekycRequest);
             return ResponseEntity.ok(ekycResponse);
-
         } catch (Exception e) {
             Map<String, Object> error = new HashMap<>();
             error.put("status", "ERROR");
             error.put("message", e.getMessage());
             return ResponseEntity.status(500).body(error);
         }
-
     }
 }
+

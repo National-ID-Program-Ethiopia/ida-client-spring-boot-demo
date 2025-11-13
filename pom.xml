@@ -1,13 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>et.ida.demo</groupId>
 	<artifactId>ida-client-demo</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<parent>
@@ -46,7 +45,6 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 
-
 		<!-- Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -59,12 +57,11 @@
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
-
 		<!-- IDA Client SDK -->
 		<dependency>
-			<groupId>et.fayda</groupId>
+			<groupId>io.github.jony1748</groupId>
 			<artifactId>ida-client</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<!-- Jose4j for JWT handling -->
@@ -104,12 +101,14 @@
 			<artifactId>kernel-pdfgenerator-itext</artifactId>
 			<version>1.2.0.1-B1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
 			<version>6.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- Jakarta EE APIs -->
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
@@ -162,7 +161,9 @@
 			<version>1.18.32</version>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
+
 	<repositories>
 		<repository>
 			<id>spring-releases</id>
@@ -172,6 +173,7 @@
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
 	</repositories>
+
 	<build>
 		<plugins>
 			<!-- Spring Boot Maven Plugin -->
@@ -179,7 +181,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
 			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -194,3 +195,4 @@
 	</build>
 
 </project>
+
